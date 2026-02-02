@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Vehicle Tracking</title>
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+let map;
+let marker;
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: { lat: 22.57, lng: 88.36 }
+    });
+
+    marker = new google.maps.Marker({
+        map: map
+    });
+
+    fetchLocation();
+    setInterval(fetchLocation, 3000);
+}
+
+function fetchLocation() {
+    fetch('/api/location')
+        .then(res => res.json())
+        .then(data => {
+            if(!data) return;
+
+            const pos = {
+                lat: parseFloat(data.lat),
+                lng: parseFloat(data.lng)
+            };
+
+            marker.setPosition(pos);
+            map.setCenter(pos);
+        });
+}
+</script>
+
+<!-- 🔴 PUT YOUR GOOGLE MAPS API KEY BELOW -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async></script>
+
+</body>
+</html>
