@@ -1,47 +1,110 @@
-# 🚗 Detection of Driving Pattern & Live Vehicle Tracking
+🚗 Detection of Driving Pattern & Real-Time Vehicle Tracking System
 
-A full-stack academic project for **real-time vehicle tracking** and **driving behavior analysis**.  
-The system ingests live GPS telemetry, persists trip data, exposes REST APIs, visualizes vehicle position on a map, and performs offline driving-pattern analysis using C++.
+A backend-centric vehicle telematics platform that ingests live GPS telemetry, persists trip data, exposes RESTful APIs, visualizes vehicle locations, and performs offline driving-behavior analysis using C++.
 
----
+Designed to simulate real-world IoT → backend → analytics pipelines with emphasis on API design, data persistence, and system integration.
 
-## 📌 Overview
+📌 Overview
 
-This project demonstrates an end-to-end pipeline for vehicle telemetry:
+End-to-end vehicle tracking and driving analytics workflow:
+GPS Simulator / Client → Laravel REST API → MySQL → Web Dashboard
+                                      ↓
+                                C++ Analytics
+The system continuously receives vehicle telemetry (latitude, longitude, speed), stores trip data in a relational database, exposes APIs for live tracking and historical playback, and performs offline analysis to classify driving behavior.
 
-**Client / Sensor → Laravel REST API → MySQL → Frontend Visualization**
+Driving analytics detects harsh acceleration, sudden braking, and aggressive vs normal driving patterns.
 
-Additionally, a standalone **C++ module** analyzes speed samples to detect:
+Primary focus areas: backend system design, data ingestion pipelines, database modeling, and cross-language integration (PHP + C++).
 
-- Harsh acceleration / braking  
-- Aggressive vs normal driving behavior  
+🛠 Tech Stack
 
-The goal is to simulate how real-world telematics systems collect data, process driving signals, and present insights.
+Backend: Laravel (PHP) – REST APIs, MVC architecture
+Database: MySQL – GPS telemetry & trip metrics
+Frontend: HTML / CSS / JavaScript, Google Maps API
+Analytics: C++ – STL-based driving-pattern classification
+Realtime (Prototype): Firebase – evaluated for streaming updates
 
----
+✨ Core Features
+Backend (Laravel + MySQL)
 
-## 🛠 Tech Stack
+REST APIs for GPS telemetry ingestion (Vehicle ID, Latitude/Longitude, Speed, Timestamp)
 
-### Backend
-- **Laravel (PHP)** – REST API, MVC architecture
-- **MySQL** – Persistent storage for location and driving metrics
+APIs for latest vehicle position, trip history, and speed samples
 
-### Frontend
-- **HTML / CSS / JavaScript**
-- **Google Maps API** – Live vehicle visualization
+Normalized relational schema for vehicles, trips, and driving metrics
 
-### Analytics
-- **C++** – Driving-pattern classification using STL containers and numeric thresholds
+Frontend
 
-### Realtime (Prototype)
-- **Firebase** – Explored for live streaming of location updates
+Live vehicle visualization on map
 
----
+Periodic polling for location updates
 
-## ✨ Key Features
+Basic trip playback
 
-### Backend (Laravel + MySQL)
-- REST APIs to ingest GPS telemetry:
-  - Latitude
-  - Longitude
- 
+C++ Driving Analytics
+
+Processes stored speed samples
+
+Detects sudden acceleration and hard braking
+
+Classifies driving behavior as aggressive or normal using numeric thresholds
+
+📂 Project Structure
+vehicle-tracking-system/
+├── backend/        # Laravel REST APIs
+├── frontend/       # Map visualization
+├── database/       # MySQL schema
+├── analytics/      # C++ driving-pattern module
+├── simulator/      # GPS data generator (optional)
+├── screenshots/
+└── README.md
+▶ How to Run
+Backend
+cd backend
+composer install
+php artisan migrate
+php artisan serve
+Frontend
+
+Open frontend/index.html in browser.
+
+C++ Analytics
+g++ driving_analysis.cpp -o analysis
+./analysis
+📊 API Endpoints
+
+POST /api/location — ingest GPS telemetry
+
+GET /api/location/{vehicle_id} — fetch latest location
+
+GET /api/history/{vehicle_id} — retrieve trip history
+
+💡 Engineering Learnings
+
+Designed RESTful APIs for telemetry ingestion
+
+Implemented backend persistence using MySQL
+
+Built near–real-time data flow via polling
+
+Applied C++ STL for analytical processing
+
+Debugged end-to-end pipelines across frontend, backend, and analytics layers
+
+Integrated heterogeneous components into a cohesive system
+
+🎯 Why This Project Matters
+
+This project emphasizes software engineering fundamentals over UI:
+
+Backend architecture & API design
+
+Data ingestion pipelines
+
+Relational database modeling
+
+C++ analytical processing
+
+Debugging distributed system components
+
+It reflects practical experience building production-style backend systems with analytics integration.
