@@ -108,3 +108,4 @@ C++ analytical processing
 Debugging distributed system components
 
 It reflects practical experience building production-style backend systems with analytics integration.
+Project uploaded and documented.
